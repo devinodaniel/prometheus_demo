@@ -14,12 +14,11 @@ services:
     user: root
     volumes:
      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+     - ./rules.yml:/etc/prometheus/rules.yml
      # needed for container discovery
      # should never mount docker socket in production
      - /var/run/docker.sock:/var/run/docker.sock
-     #- ./rules.yml:/etc/prometheus/rules.yml
     profiles: ["prometheus", "demo"]
-
   
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.19.0
@@ -29,6 +28,8 @@ services:
   alertmanager:
     image: prom/alertmanager:v0.22.2
     ports: [9093:9093]
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
     profiles: ["alertmanager", "prometheus", "demo"]
   
   grafana:

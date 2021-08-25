@@ -31,3 +31,10 @@ You'll need something to monitor. Let's start some simple webservers.
 docker compose --profile web up
 ```
 
+## Add Slack webhook to `alertmanager.yml`
+
+Under `global`.`slack_api_url` add a valid slack webhook URL.
+
+Under `slack_configs`.`channel` update the channel name to be a valid channel.
+
+

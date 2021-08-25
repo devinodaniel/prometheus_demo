@@ -1,1 +1,19 @@
-rules.yml
+groups:
+- name: containers
+  rules:
+  - alert: ContainerDown
+    expr: engine_daemon_container_states_containers{state="stopped"} != 0
+    labels:
+      severity: page
+    annotations:
+      summary: Container has stopped
+      description: "{{ $value }} containers is stopped"
+- name: webserver
+  rules:
+  - alert: PingUnreachable
+    expr: probe_success{container_service="webserver"} == 0
+    labels:
+      severity: page
+    annotations:
+      summary: Webserver ping unreachable
+      description: "{{ $labels.container_name }} is unreachable via ping"
