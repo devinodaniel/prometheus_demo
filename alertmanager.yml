@@ -1,7 +1,8 @@
 # For a complete example:
 # https://github.com/prometheus/alertmanager/blob/main/doc/examples/simple.yml
 global:
-  slack_api_url: ''
+  # Do not commit a Slack webhook
+  slack_api_url: '<do_not_commit_slack_webhook>'
 
 route:
   receiver: 'slack-notifications'
