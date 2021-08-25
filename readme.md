@@ -37,4 +37,5 @@ Under `global`.`slack_api_url` add a valid slack webhook URL.
 
 Under `slack_configs`.`channel` update the channel name to be a valid channel.
 
+If you'd lke some fun reading on why Alertmanager doesn't support env vars in config files and some alternatives on how to manage secrets (like Slack webhooks) check out this [Alertmanager issue](https://github.com/prometheus/alertmanager/issues/504).
 
