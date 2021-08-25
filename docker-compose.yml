@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  webserver:
+    build: ./simple_server_go
+    image: simple_server_go:0.0.1
+    ports: [8080]
+    deploy:
+      replicas: 5
+    profiles: ["web", "demo"]
+  
+  prometheus:
+    image: prom/prometheus:v2.29.1
+    ports: [9090:9090]
+    user: root
+    volumes:
+     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+     # needed for container discovery
+     # should never mount docker socket in production
+     - /var/run/docker.sock:/var/run/docker.sock
+     #- ./rules.yml:/etc/prometheus/rules.yml
+    profiles: ["prometheus", "demo"]
+
+  
+  blackbox_exporter:
+    image: prom/blackbox-exporter:v0.19.0
+    ports: [9115:9115]
+    profiles: ["blackbox", "prometheus", "demo"]
+  
+  alertmanager:
+    image: prom/alertmanager:v0.22.2
+    ports: [9093:9093]
+    profiles: ["alertmanager", "prometheus", "demo"]
+  
+  grafana:
+    image: grafana/grafana:8.1.2
+    ports: [3000:3000]
+    profiles: ["grafana", "demo"]
