@@ -1,26 +1,45 @@
+/* templates modified from: */
+/* https://gist.github.com/milesbxf/e2744fc90e9c41b47aa47925f8ff6512 */
+
 /********************/
 /* SLACK.TITLE */
 /********************/
 
-{{ define "slack.title" }}
-[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}]
-{{ .CommonLabels.alertname }}
-{{ end }}
+{{ define "slack.title" -}}
+    [{{ .Status | toUpper -}}
+    {{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}
+    ] {{ template "slack.alert.severity.prefix.title" . }} {{ .CommonLabels.alertname }}
+{{- end }}
 
 /********************/
 /* SLACK.TEXT */
 /********************/
 
-{{ define "slack.text" }}
-{{ range .Alerts }}
-	
-:loud_sound: *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} `{{ .Labels.severity }}`{{ end }}
-*Description:* {{ .Annotations.description }}
-*Runbook:* {{ .Annotations.runbook }}
-*Graph:* {{ .Annotations.graph }}
-*Details:* {{ range .Labels.SortedPairs }}
- • *{{ .Name }}:* `{{ .Value }}`
-{{ end -}}
+{{ define "slack.text" -}}
+	{{ range .Alerts }}	
+		*Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} `{{ .Labels.severity }}`{{ end -}}
+		*Description:* {{ .Annotations.description }}
+		*Runbook:* {{ .Annotations.runbook }}
+		Graph:* {{ .Annotations.graph }}
+		*Details:* {{ range .Labels.SortedPairs -}}
+ 		• *{{ .Name }}:* `{{ .Value }}`
+		{{ end -}}
+	{{ end -}}
+{{- end }}
 
-{{ end }}
-{{ end }}
+/********************/
+/* SLACK.ALERT.SEVERITY.PREFIX.TITLE */
+/********************/
+{{ define "slack.alert.severity.prefix.title" -}}
+    {{ if ne .Status "firing" -}}
+    :lgtm:
+    {{- else if eq .CommonLabels.severity "critical" -}}
+    :fire:
+    {{- else if eq .CommonLabels.severity "warning" -}}
+    :warning:
+    {{- else if eq .CommonLabels.severity "info" -}}
+    :information_source:
+    {{- else -}}
+    :question:
+    {{- end }}
+{{- end }}
