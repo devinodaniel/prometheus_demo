@@ -1,19 +1,65 @@
 groups:
 - name: containers
   rules:
-  - alert: ContainerDown
-    expr: engine_daemon_container_states_containers{state="stopped"} != 0
+  - alert: DockerNotMonitored
+    expr: up{job="docker"} == 0
+    for: 10s
     labels:
-      severity: page
+      severity: warning
     annotations:
-      summary: Container has stopped
-      description: "{{ $value }} containers is stopped"
+      summary: Docker socket not monitored
+      description: "Docker socket is not being monitored. Check that the experimental Docker feature `/metrics` is exposed."
+      runbook: https://github.com/devinodaniel/prometheus_demo#enable-docker-metrics
+      graph: https://link_to_graph
+
 - name: webserver
   rules:
-  - alert: PingUnreachable
-    expr: probe_success{container_service="webserver"} == 0
+  - alert: WebserverDown
+    expr: absent(probe_success{container_service="webserver"})
+    for: 4s
     labels:
-      severity: page
+      severity: critical
     annotations:
-      summary: Webserver ping unreachable
-      description: "{{ $labels.container_name }} is unreachable via ping"
+      summary: Webserver down
+      description: "Webserver is unreachable. The container has stopped."
+      runbook: https://link_to_runbook
+      graph: https://link_to_graph
+
+- name: alertmanager
+  rules:
+  - alert: AlertmanagerDown
+    expr: up{job="alertmanager"} == 0
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      summary: Alertmanager is down
+      description: "Alertmanager is not reachable from Prometheus. Make sure the container is running."
+      runbook: https://link_to_runbook
+      graph: https://link_to_graph
+
+- name: grafana
+  rules:
+  - alert: GrafanaDown
+    expr: up{job="grafana"} == 0
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      summary: Grafana is down
+      description: "Grafana is not reachable from Prometheus. Make sure the container is running."
+      runbook: https://link_to_runbook
+      graph: https://link_to_graph
+
+- name: blackbox_exporter
+  rules:
+  - alert: BlackboxExporterDown
+    expr: up{job="blackbox_exporter"} == 0
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      summary: Blackbox Exporter is down
+      description: "Blackbox Exporter is not reachable from Prometheus. Make sure the container is running."
+      runbook: https://link_to_runbook
+      graph: https://link_to_graph

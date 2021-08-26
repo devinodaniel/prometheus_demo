@@ -2,36 +2,35 @@
 # https://github.com/prometheus/alertmanager/blob/main/doc/examples/simple.yml
 global:
   # Do not commit a Slack webhook
-  slack_api_url: '<do_not_commit_slack_webhook>'
-
-route:
-  receiver: 'slack-notifications'
+  slack_api_url_file: '/etc/alertmanager/slack_api_url.secret'
 
 receivers:
 - name: 'slack-notifications'
   slack_configs:
-  - channel: '#prometheus_demo'
-    send_resolved: true
+  - send_resolved: true
     icon_url: https://avatars3.githubusercontent.com/u/3380462
-    title: |-
-     [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}
-     {{- if gt (len .CommonLabels) (len .GroupLabels) -}}
-       {{" "}}(
-       {{- with .CommonLabels.Remove .GroupLabels.Names }}
-         {{- range $index, $label := .SortedPairs -}}
-           {{ if $index }}, {{ end }}
-           {{- $label.Name }}="{{ $label.Value -}}"
-         {{- end }}
-       {{- end -}}
-       )
-     {{- end }}
-    text: >-
-     {{ range .Alerts -}}
-     *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} `{{ .Labels.severity }}`{{ end }}
+    title: '{{- template "slack.title" . -}}'
+    text: '{{- template "slack.text" . -}}'
 
-     *Description:* {{ .Annotations.description }}
+# Files from which custom notification template definitions are read.
+# The last component may use a wildcard matcher, e.g. 'templates/*.tmpl'.
+templates:
+- "/etc/alertmanager/*.tmpl"
 
-     *Details:*
-       {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-       {{ end }}
-     {{ end }}
+# The root route on which each incoming alert enters.
+route:
+  receiver: 'slack-notifications'
+  # When a new group of alerts is created by an incoming alert, wait at
+  # least 'group_wait' to send the initial notification.
+  # This way ensures that you get multiple alerts for the same group that start
+  # firing shortly after another are batched together on the first
+  # notification.
+  group_wait: 1s
+
+  # When the first notification was sent, wait 'group_interval' to send a batch
+  # of new alerts that started firing for that group.
+  group_interval: 1s
+
+  # If an alert has successfully been sent, wait 'repeat_interval' to
+  # resend them.
+  repeat_interval: 1h

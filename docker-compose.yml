@@ -3,9 +3,7 @@ services:
   webserver:
     build: ./simple_server_go
     image: simple_server_go:0.0.1
-    ports: [8080]
-    deploy:
-      replicas: 5
+    ports: [80:8080]
     profiles: ["web", "demo"]
   
   prometheus:
@@ -18,19 +16,24 @@ services:
      # needed for container discovery
      # should never mount docker socket in production
      - /var/run/docker.sock:/var/run/docker.sock
-    profiles: ["prometheus", "demo"]
+    profiles: ["monitor", "demo"]
   
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.19.0
     ports: [9115:9115]
-    profiles: ["blackbox", "prometheus", "demo"]
+    profiles: ["monitor", "demo"]
   
   alertmanager:
     image: prom/alertmanager:v0.22.2
     ports: [9093:9093]
     volumes:
+      # main config
       - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
-    profiles: ["alertmanager", "prometheus", "demo"]
+      # slack webhook
+      - ./slack_api_url.secret:/etc/alertmanager/slack_api_url.secret
+      # slack template for alerts
+      - ./alertmanager.slack.tmpl:/etc/alertmanager/alertmanager.slack.tmpl
+    profiles: ["monitor", "demo"]
   
   grafana:
     image: grafana/grafana:8.1.2

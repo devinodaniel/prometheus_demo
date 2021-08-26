@@ -20,8 +20,8 @@ func main() {
 
 func startWebServer() error {
 	http.HandleFunc("/", hello)
-	http.HandleFunc("/status", status)
 	http.HandleFunc("/metrics", metrics)
+	http.HandleFunc("/health", health)
 
 	log.Printf("Starting server at port %s \n", port)
 
@@ -35,10 +35,10 @@ func startWebServer() error {
 func hello(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "hello, world!\n")
 	fmt.Fprintf(w, "try /metrics\n")
-	fmt.Fprintf(w, "try /status\n")
+	fmt.Fprintf(w, "try /health\n")
 }
 
-func status(w http.ResponseWriter, req *http.Request) {
+func health(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "UP\n")
 }
 

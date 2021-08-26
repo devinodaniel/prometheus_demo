@@ -1,0 +1,26 @@
+/********************/
+/* SLACK.TITLE */
+/********************/
+
+{{ define "slack.title" }}
+[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}]
+{{ .CommonLabels.alertname }}
+{{ end }}
+
+/********************/
+/* SLACK.TEXT */
+/********************/
+
+{{ define "slack.text" }}
+{{ range .Alerts }}
+	
+:loud_sound: *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} `{{ .Labels.severity }}`{{ end }}
+*Description:* {{ .Annotations.description }}
+*Runbook:* {{ .Annotations.runbook }}
+*Graph:* {{ .Annotations.graph }}
+*Details:* {{ range .Labels.SortedPairs }}
+ • *{{ .Name }}:* `{{ .Value }}`
+{{ end -}}
+
+{{ end }}
+{{ end }}
