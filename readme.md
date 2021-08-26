@@ -35,6 +35,8 @@ Create a file called `slack_api_url.secret` in the root of this repo. (Files wit
 https://hooks.slack.com/services/TXXXXXXXM/BXXXXXXXXN/CXXXXXXYYYYYYZZZZZZZT
 ```
 
+> IMPORTANT: there should be no new line after the webhook URL or alertmanager will fail to start.
+
 ## Launch Prometheus
 
 ```bash
