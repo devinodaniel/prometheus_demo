@@ -23,6 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
+  "iteration": 1629989605113,
   "links": [],
   "panels": [
     {
@@ -89,7 +90,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "up{job=\"grafana\"}",
+          "expr": "count(up{job=\"grafana\"}==1) ",
           "interval": "",
           "legendFormat": " Grafana",
           "refId": "A"
@@ -161,7 +162,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "up{job=\"blackbox_exporter\"} ",
+          "expr": "count(up{job=\"blackbox_exporter\"}==1) ",
           "interval": "",
           "legendFormat": " Blackbox Exporter",
           "refId": "A"
@@ -233,7 +234,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "up{job=\"alertmanager\"}",
+          "expr": "count(up{job=\"alertmanager\"}==1) ",
           "interval": "",
           "legendFormat": " Alertmanager",
           "refId": "A"
@@ -305,7 +306,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "up{container_service=\"webserver\"}",
+          "expr": "count(up{container_service=\"webserver\"}==1) ",
           "interval": "",
           "legendFormat": " Webserver",
           "refId": "A"
@@ -339,8 +340,7 @@
                 "value": 99
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
@@ -370,13 +370,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(up{job=~\"grafana\"}[1h]) * 100)",
+          "expr": "avg(avg_over_time(up{job=~\"grafana\"}[$int]) * 100)",
           "interval": "",
           "legendFormat": "Grafana",
           "refId": "A"
         }
       ],
-      "title": "Up[1h]",
+      "title": "Up[$int]",
       "type": "stat"
     },
     {
@@ -405,8 +405,7 @@
                 "value": 99
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
@@ -436,13 +435,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(up{job=~\"blackbox_exporter\"}[1h]) * 100)",
+          "expr": "avg(avg_over_time(up{job=~\"blackbox_exporter\"}[$int]) * 100)",
           "interval": "",
           "legendFormat": "Blackbox Exporter",
           "refId": "A"
         }
       ],
-      "title": "Up[1h]",
+      "title": "Up[$int]",
       "type": "stat"
     },
     {
@@ -471,8 +470,7 @@
                 "value": 99
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
@@ -502,13 +500,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(up{job=~\"alertmanager\"}[1h]) * 100)",
+          "expr": "avg(avg_over_time(up{job=~\"alertmanager\"}[$int]) * 100)",
           "interval": "",
           "legendFormat": "Alertmanager",
           "refId": "A"
         }
       ],
-      "title": "Up[1h]",
+      "title": "Up[$int]",
       "type": "stat"
     },
     {
@@ -537,8 +535,7 @@
                 "value": 99
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
@@ -568,13 +565,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(up{container_service=\"webserver\"}[1h]) * 100)",
+          "expr": "avg(avg_over_time(up{container_service=\"webserver\"}[$int]) * 100)",
           "interval": "",
           "legendFormat": "Webserver",
           "refId": "A"
         }
       ],
-      "title": "Up[1h]",
+      "title": "Up[$int]",
       "type": "stat"
     }
   ],
@@ -583,7 +580,44 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "1h",
+          "value": "1h"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Interval",
+        "multi": false,
+        "name": "int",
+        "options": [
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          }
+        ],
+        "query": "5m,30m,1h,",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
@@ -593,5 +627,5 @@
   "timezone": "",
   "title": "Prometheus Demo",
   "uid": "JpkOnG4nz",
-  "version": 1
+  "version": 4
 }
