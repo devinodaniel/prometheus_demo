@@ -27,15 +27,20 @@ services:
     image: prom/alertmanager:v0.22.2
     ports: [9093:9093]
     volumes:
-      # main config
-      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
-      # slack webhook
-      - ./slack_api_url.secret:/etc/alertmanager/slack_api_url.secret
-      # slack template for alerts
-      - ./alertmanager.slack.tmpl:/etc/alertmanager/alertmanager.slack.tmpl
+     # main config
+     - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+     # slack webhook
+     - ./slack_api_url.secret:/etc/alertmanager/slack_api_url.secret
+     # slack template for alerts
+     - ./alertmanager.slack.tmpl:/etc/alertmanager/alertmanager.slack.tmpl
     profiles: ["monitor", "demo"]
   
   grafana:
     image: grafana/grafana:8.1.2
     ports: [3000:3000]
+    volumes:
+     - grafana-storage:/var/lib/grafana
     profiles: ["grafana", "demo"]
+
+volumes:
+  grafana-storage:

@@ -84,13 +84,11 @@ For *URL* enter `prometheus:9090`, leave access as `Server`.
 
 Scroll to the bottom and select *Save & test*. You should see a green success notification.
 
-Click the *+* (plus) sign in the left menu bar to create a dashboard.
+Click the *+* (plus) sign in the left sidebar to create a dashboard.
 
 Select *Import* from the submenu.
 
 Select *Upload JSON file*, then choose `demo_dash.json` from this repo.
-
-> Important: when you remove the Grafana container you will lose any customizations to dashboards. ALL WORK WILL BE LOST. To keep the Grafana dashboards you create you'll need to mount a volume.
 
 ## Clean up
 
@@ -98,4 +96,12 @@ Stop and remove all containers and downloaded images.
 
 ```bash
 docker compose --profile demo down --rmi all
+```
+
+Remove storage volumes.
+
+> WARNING: If you remove the volumes you will lose *all* Grafana dashboards that you created or customized.
+
+```bash
+docker compose --profile demo down -v
 ```

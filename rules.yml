@@ -8,7 +8,7 @@ groups:
       severity: warning
     annotations:
       summary: Docker socket not monitored
-      description: "Docker socket is not being monitored. Check that the experimental Docker feature `/metrics` is exposed."
+      description: "Docker socket is not being monitored. Check that the experimental Docker feature `/metrics` is exposed.\n"
       runbook: https://github.com/devinodaniel/prometheus_demo#enable-docker-metrics
       graph: https://link_to_graph
 
@@ -16,12 +16,12 @@ groups:
   rules:
   - alert: WebserverDown
     expr: absent(probe_success{container_service="webserver"})
-    for: 4s
+    for: 2s
     labels:
       severity: critical
     annotations:
       summary: Webserver down
-      description: "Webserver is unreachable. The container has stopped."
+      description: "Webserver is unreachable. The container has stopped.\n"
       runbook: https://link_to_runbook
       graph: https://link_to_graph
 
@@ -29,12 +29,12 @@ groups:
   rules:
   - alert: AlertmanagerDown
     expr: up{job="alertmanager"} == 0
-    for: 5s
+    for: 2s
     labels:
       severity: warning
     annotations:
       summary: Alertmanager is down
-      description: "Alertmanager is not reachable from Prometheus. Make sure the container is running."
+      description: "Alertmanager is not reachable from Prometheus. Make sure the container is running.\n"
       runbook: https://link_to_runbook
       graph: https://link_to_graph
 
@@ -47,7 +47,7 @@ groups:
       severity: warning
     annotations:
       summary: Grafana is down
-      description: "Grafana is not reachable from Prometheus. Make sure the container is running."
+      description: "Grafana is not reachable from Prometheus. Make sure the container is running.\n"
       runbook: https://link_to_runbook
       graph: https://link_to_graph
 
@@ -55,11 +55,11 @@ groups:
   rules:
   - alert: BlackboxExporterDown
     expr: up{job="blackbox_exporter"} == 0
-    for: 5s
+    for: 2s
     labels:
       severity: warning
     annotations:
       summary: Blackbox Exporter is down
-      description: "Blackbox Exporter is not reachable from Prometheus. Make sure the container is running."
+      description: "Blackbox Exporter is not reachable from Prometheus. Make sure the container is running.\n"
       runbook: https://link_to_runbook
       graph: https://link_to_graph
