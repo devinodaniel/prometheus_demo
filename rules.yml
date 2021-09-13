@@ -16,7 +16,7 @@ groups:
   rules:
   - alert: WebserverDown
     expr: absent(probe_success{container_service="webserver"})
-    for: 2s
+    for: 1s
     labels:
       severity: critical
     annotations:
@@ -29,7 +29,6 @@ groups:
   rules:
   - alert: AlertmanagerDown
     expr: up{job="alertmanager"} == 0
-    for: 2s
     labels:
       severity: warning
     annotations:
@@ -42,7 +41,6 @@ groups:
   rules:
   - alert: GrafanaDown
     expr: up{job="grafana"} == 0
-    for: 5s
     labels:
       severity: warning
     annotations:
@@ -55,7 +53,6 @@ groups:
   rules:
   - alert: BlackboxExporterDown
     expr: up{job="blackbox_exporter"} == 0
-    for: 2s
     labels:
       severity: warning
     annotations:
