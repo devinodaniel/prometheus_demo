@@ -9,8 +9,16 @@ receivers:
   slack_configs:
   - send_resolved: true
     icon_url: https://avatars3.githubusercontent.com/u/3380462
-    title: '{{- template "slack.title" . -}}'
-    text: '{{- template "slack.text" . -}}'
+    title: '{{ template "slack.title" . }}'
+    text: '{{ template "slack.text" . }}'
+    actions:
+      - type: button
+        text: 'Runbook :notebook:'
+        url: '{{ (index .Alerts 0).Annotations.runbook }}'
+      - type: button
+        text: 'Graph :chart_with_upwards_trend:'
+        url: '{{ (index .Alerts 0).Annotations.GeneratorURL }}'
+
 
 # Files from which custom notification template definitions are read.
 # The last component may use a wildcard matcher, e.g. 'templates/*.tmpl'.

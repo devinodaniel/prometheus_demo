@@ -21,7 +21,7 @@ services:
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.19.0
     ports: [9115:9115]
-    profiles: ["monitor", "demo"]
+    profiles: ["monitor", "blackbox", "demo"]
   
   alertmanager:
     image: prom/alertmanager:v0.22.2
@@ -33,7 +33,7 @@ services:
      - ./slack_api_url.secret:/etc/alertmanager/slack_api_url.secret
      # slack template for alerts
      - ./alertmanager.slack.tmpl:/etc/alertmanager/alertmanager.slack.tmpl
-    profiles: ["monitor", "demo"]
+    profiles: ["monitor", "alertmanager", "demo"]
   
   grafana:
     image: grafana/grafana:8.1.2
