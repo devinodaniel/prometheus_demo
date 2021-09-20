@@ -31,8 +31,10 @@ Create a file called `slack_api_url.secret` in the root of this repo. (Files wit
 
 *slack_api_url.secret:*
 
+> THIS IS A FAKE URL - PLEASE INSERT YOUR OWN VALID API URL
+
 ```bash
-https://hooks.slack.com/services/TXXXXXXXM/BXXXXXXXXN/CXXXXXXYYYYYYZZZZZZZT
+https://hooks.slack.com/services/SOMETHING/THAT/IS/VALID
 ```
 
 > IMPORTANT: there should be no new line after the webhook URL or alertmanager will fail to start.
