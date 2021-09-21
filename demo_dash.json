@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1632096963708,
+  "iteration": 1632185238344,
   "links": [],
   "panels": [
     {
@@ -66,83 +66,18 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
+        "w": 4,
         "x": 0,
         "y": 0
       },
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.2",
-      "targets": [
+      "id": 21,
+      "links": [
         {
-          "exemplar": true,
-          "expr": "count(up{job=\"grafana\"}==1) ",
-          "interval": "",
-          "legendFormat": " Grafana",
-          "refId": "A"
+          "targetBlank": true,
+          "title": "localhost:9090",
+          "url": "localhost:9090"
         }
       ],
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "dark-red",
-                  "index": 1,
-                  "text": "DOWN"
-                },
-                "1": {
-                  "color": "dark-green",
-                  "index": 0,
-                  "text": "UP"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "noValue": "Error",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 5,
-        "y": 0
-      },
-      "id": 21,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -210,11 +145,98 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 10,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "id": 8,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "localhost:3000",
+          "url": "localhost:3000"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "count(up{job=\"grafana\"}==1) ",
+          "interval": "",
+          "legendFormat": " Grafana",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "noValue": "Error",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
         "y": 0
       },
       "id": 9,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "localhost:9115",
+          "url": "localhost:9115"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -282,11 +304,18 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 15,
+        "w": 4,
+        "x": 12,
         "y": 0
       },
       "id": 10,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "localhost:9093",
+          "url": "http://localhost:9093"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -308,7 +337,7 @@
           "exemplar": true,
           "expr": "up{job=\"alertmanager\"}",
           "interval": "",
-          "legendFormat": " Alertmanager",
+          "legendFormat": "Alertmanager",
           "refId": "A"
         }
       ],
@@ -334,13 +363,20 @@
                   "color": "dark-green",
                   "index": 0,
                   "text": "UP"
-                },
-                "DOWN": {
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "semi-dark-red",
                   "index": 2,
                   "text": "DOWN"
                 }
               },
-              "type": "value"
+              "type": "special"
             }
           ],
           "min": 0,
@@ -360,10 +396,17 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 0
       },
       "id": 11,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "localhost",
+          "url": "localhost"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -371,7 +414,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -383,7 +426,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "up{container_service=\"webserver\"}",
+          "expr": "probe_success{container_service=\"webserver\"}",
           "interval": "",
           "legendFormat": " Webserver",
           "refId": "A"
@@ -424,74 +467,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
+        "w": 4,
         "x": 0,
-        "y": 4
-      },
-      "id": 13,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.2",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "avg(avg_over_time(up{job=~\"grafana\"}[$int]) * 100)",
-          "interval": "",
-          "legendFormat": "Grafana",
-          "refId": "A"
-        }
-      ],
-      "title": "Available[$int]",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 3,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-red",
-                "value": null
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 90
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 99
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 5,
         "y": 4
       },
       "id": 22,
@@ -556,8 +533,75 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 10,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
+      "id": 13,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(avg_over_time(up{job=~\"grafana\"}[$int]) * 100)",
+          "interval": "",
+          "legendFormat": "Grafana",
+          "refId": "A"
+        }
+      ],
+      "title": "Available[$int]",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 90
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
         "y": 4
       },
       "id": 14,
@@ -622,8 +666,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 15,
+        "w": 4,
+        "x": 12,
         "y": 4
       },
       "id": 15,
@@ -652,7 +696,7 @@
           "refId": "A"
         }
       ],
-      "title": "Available$int]",
+      "title": "Available[$int]",
       "type": "stat"
     },
     {
@@ -689,7 +733,7 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 4
       },
       "id": 16,
@@ -700,7 +744,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -712,7 +756,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(up{container_service=\"webserver\"}[$int]) * 100)",
+          "expr": "avg(avg_over_time(probe_success{container_service=\"webserver\"}[$int]) * 100)",
           "interval": "",
           "legendFormat": "Webserver",
           "refId": "A"
@@ -782,98 +826,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
+        "w": 4,
         "x": 0,
-        "y": 8
-      },
-      "id": 18,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "pluginVersion": "8.1.2",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "avg(avg_over_time(scrape_duration_seconds{job=\"grafana\"}[$int]) * 100)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "scrape",
-          "refId": "B"
-        }
-      ],
-      "title": "Latency[$int]",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 3,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-red",
-                "value": null
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 90
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 99
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 5,
         "y": 8
       },
       "id": 23,
@@ -891,14 +845,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(scrape_duration_seconds{job=\"prometheus\"}[$int]) * 100)",
+          "expr": "scrape_duration_seconds{job=\"prometheus\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "scrape",
           "refId": "B"
         }
       ],
-      "title": "Latency[$int]",
+      "title": "Latency",
       "type": "timeseries"
     },
     {
@@ -962,8 +916,98 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 10,
+        "w": 4,
+        "x": 4,
+        "y": 8
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scrape_duration_seconds{job=\"grafana\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "scrape",
+          "refId": "B"
+        }
+      ],
+      "title": "Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 90
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
         "y": 8
       },
       "id": 20,
@@ -981,14 +1025,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(scrape_duration_seconds{job=\"blackbox_exporter\"}[$int]) * 100)",
+          "expr": "scrape_duration_seconds{job=\"blackbox_exporter\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "scrape",
           "refId": "B"
         }
       ],
-      "title": "Latency[$int]",
+      "title": "Latency",
       "type": "timeseries"
     },
     {
@@ -1052,8 +1096,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 15,
+        "w": 4,
+        "x": 12,
         "y": 8
       },
       "id": 19,
@@ -1071,14 +1115,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(scrape_duration_seconds{job=\"alertmanager\"}[$int]) * 100)",
+          "expr": "scrape_duration_seconds{job=\"alertmanager\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "scrape",
           "refId": "B"
         }
       ],
-      "title": "Latency[$int]",
+      "title": "Latency",
       "type": "timeseries"
     },
     {
@@ -1135,7 +1179,7 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 8
       },
       "id": 17,
@@ -1153,21 +1197,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(avg_over_time(probe_duration_seconds{container_service=\"webserver\"}[$int]) * 100)",
+          "expr": "probe_duration_seconds{container_service=\"webserver\"}",
+          "hide": false,
           "interval": "",
           "legendFormat": "ping (ICMP)",
           "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "avg(avg_over_time(scrape_duration_seconds{container_service=\"webserver\"}[$int]) * 100)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "scrape",
-          "refId": "B"
         }
       ],
-      "title": "Latency[$int]",
+      "title": "Latency",
       "type": "timeseries"
     }
   ],
@@ -1180,7 +1217,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "1h",
           "value": "1h"
         },
@@ -1222,6 +1259,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Prometheus Demo",
-  "uid": "f9CKZN4nz",
-  "version": 7
+  "uid": "oQdJonH7k",
+  "version": 6
 }
