@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1632185238344,
+  "iteration": 1632185787107,
   "links": [],
   "panels": [
     {
@@ -75,7 +75,7 @@
         {
           "targetBlank": true,
           "title": "localhost:9090",
-          "url": "localhost:9090"
+          "url": "http://localhost:9090"
         }
       ],
       "options": {
@@ -154,7 +154,7 @@
         {
           "targetBlank": true,
           "title": "localhost:3000",
-          "url": "localhost:3000"
+          "url": "http://localhost:3000"
         }
       ],
       "options": {
@@ -234,7 +234,7 @@
         {
           "targetBlank": true,
           "title": "localhost:9115",
-          "url": "localhost:9115"
+          "url": "http://localhost:9115"
         }
       ],
       "options": {
@@ -404,7 +404,7 @@
         {
           "targetBlank": true,
           "title": "localhost",
-          "url": "localhost"
+          "url": "http://localhost"
         }
       ],
       "options": {
@@ -1259,6 +1259,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Prometheus Demo",
-  "uid": "oQdJonH7k",
-  "version": 6
+  "uid": "jf1CLnHnk",
+  "version": 1
 }
